@@ -1,0 +1,14 @@
+ #include<stdio.h>
+   int main()
+   {
+      int n;
+      printf("enter the number:");
+      scanf("%d",&n);
+    printf("square=%d\n",n*n);
+      printf("cube=%d",n*n*n);
+      return 0;
+  }
+output:
+enter the number:
+square:49
+cube:343
