@@ -1,0 +1,12 @@
+  #include<stdio.h>
+   int main()
+   {
+      int min;
+      printf("enter the minutes:");
+      scanf("%d",&min);
+      printf("hours=%2f",min/60.0);
+      return 0;
+   }
+output
+enter the minutes:767
+hours:12.7833
