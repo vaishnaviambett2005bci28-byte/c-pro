@@ -1,0 +1,36 @@
+#include <stdio.h>
+int main() 
+{
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter %d positive integers:\n", n);
+    for(int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int max_count = 0;
+    int current_count = 0;
+    for(int i = 0; i < n; i++) 
+    {
+        if(arr[i] % 2 == 0) 
+        {
+            current_count++; 
+            if(current_count > max_count) 
+            {
+                max_count = current_count; 
+            }
+        }
+        else 
+        {
+            current_count = 0; 
+        }
+    }
+    printf("Maximum continuous even numbers: %d\n", max_count);
+    return 0;
+}
+output:
+enter the size of the array:5
+enter the 5 positive number:22 66 54 77 25
+maximum continuous even number:3
