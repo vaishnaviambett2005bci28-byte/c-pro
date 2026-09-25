@@ -1,0 +1,33 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* decrypt(int* code, int codeSize, int k, int* returnSize) {
+    int *result = calloc(codeSize, sizeof(int));
+    int sum = 0;
+
+    if (k > 0) {
+        for (int i = 1; i <= k; i++) {
+            sum += code[i % codeSize];
+        }
+        for (int i = 0; i < codeSize; i++) {
+            result[i] = sum;
+            sum = (sum - code[(i + 1) % codeSize]) + code[(i + 1 + k) % codeSize];
+        }
+    } else {
+        for (int i = codeSize + k; i < codeSize; i++) {
+            sum += code[i];
+        }
+        for (int i = 0; i < codeSize; i++) {
+            result[i] = sum;
+            sum = (sum - code[(i + codeSize + k) % codeSize]) + code[i];
+        }
+    }
+
+    *returnSize = codeSize;
+    return result;
+}
+Input
+code =[5,7,1,4]
+k =3
+Output
+[12,10,16,13]
