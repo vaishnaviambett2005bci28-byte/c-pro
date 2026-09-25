@@ -1,0 +1,53 @@
+char* longestNiceSubstring(char* s) {
+    int slen = strlen(s);
+    int alen = 0;
+    int mlen = 0, mind = 0;
+    int i = 0, j = 1;
+
+    // Brute Force approach
+    for (i = 0; i < slen - 1; i++) {
+        // Tracks upper and lower letters;
+        int upper = 0, lower = 0;
+        if (s[i] <= 'Z') {
+            upper |= 1 << (s[i] - 'A');
+        } else {
+            lower |= 1 << (s[i] - 'a');
+        }
+
+        for (j = i + 1; j < slen; j++) {
+            if (s[j] <= 'Z') {
+                upper |= 1 << (s[j] - 'A');
+            } else {
+                lower |= 1 << (s[j] - 'a');
+            }
+
+            if (lower != 0 && (upper == lower)) {
+                // Nice Substring Present
+                // Calculate Length
+                alen = j - i + 1;
+                if (alen > mlen) {
+                    // Capture Longest Length and index.
+                    mlen = alen;
+                    mind = i;
+                }
+            }
+        }
+    }
+
+    // Build the solution
+    char* ans = malloc((mlen + 1) * sizeof(char));
+    i = 0;
+    if (mlen > 0) {
+        while (mlen != 0) {
+            ans[i++] = s[i + mind];
+            mlen--;
+        }
+    }
+    ans[i] = '\0';
+
+    return ans;
+}
+Input
+s ="YazaAay"
+Output
+"aAa"
