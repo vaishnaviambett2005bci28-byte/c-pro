@@ -1,0 +1,50 @@
+int divisorSubstrings(int num, int k) 
+{
+    //Convert the number to string
+    char * str = (char *)malloc(sizeof(char) * 11);
+    sprintf(str, "%d", num);
+   
+    int start = 0;
+    int end = 0;
+
+    int cur_num = 0;
+    int multiplier = 10;
+    int max_len = 0;
+
+    while(str[end])
+    {
+        if(end - start < k)
+        {
+            //Retrieve the num with length k
+            cur_num = (cur_num * multiplier) + (str[end] - '0'); 
+            end++;
+        }
+        else if(end - start == k)
+        {
+            //Check the conditions
+            if((cur_num != 0) && ((num % cur_num) == 0))
+            {
+                max_len++;
+            }
+            int divisor = (str[start] - '0')*pow(10, k-1);
+            if(divisor != 0)
+                cur_num = cur_num % divisor;
+            start++;
+        }
+    }
+
+    if(end - start == k)
+    {
+        //Check the conditions
+        if((cur_num != 0) && ((num % cur_num) == 0))
+        {
+            max_len++;
+        }
+    }
+    return max_len;
+}
+Input
+num =240
+k =2
+Output
+2
