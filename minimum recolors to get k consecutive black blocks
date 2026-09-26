@@ -1,0 +1,32 @@
+int minimumRecolors(char* blocks, int k) {
+    int i = 0;
+    int b = 0;
+    int w = 0;
+    int ans = k;
+
+    while(i<k){
+        if(blocks[i]=='B'){ b++; }
+        if(blocks[i]=='W'){ w++; }
+        i++;
+    }
+
+    if(w<ans){ ans = w; }
+
+    while(blocks[i]!='\0'){
+        if(blocks[i]=='B'){ b++; }
+        if(blocks[i]=='W'){ w++; }
+
+        if(blocks[i-k]=='B'){ b--; }
+        if(blocks[i-k]=='W'){ w--; }
+
+        if(w<ans){ ans = w; }
+        i++;
+    }
+
+    return ans;
+}
+Input
+blocks ="WBBWWBBWBW"
+k =7
+Output
+3
